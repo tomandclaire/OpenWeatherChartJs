@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CretanVillas2019.Models
+namespace YourSolutionName.Models
 {
     public class OpenWeatherMap
     {
