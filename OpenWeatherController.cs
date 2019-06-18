@@ -1,12 +1,12 @@
 using ChartJSCore.Models;
-using CretanVillas2019.Models;
+using YourSolutionName.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CretanVillas2019.Controllers
+namespace YourSolutionName.Controllers
 {
 
     public class OpenWeatherController : Controller
