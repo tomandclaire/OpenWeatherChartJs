@@ -1,0 +1,25 @@
+@model YourSolutionName.Models.OpenWeatherMap
+
+
+<div class="text-center" style="margin:0 auto 25px auto;">
+
+    <div>
+        <h6 class="text-warning">
+            @DateTime.Parse(Model.list[0].dt_txt).DayOfWeek
+            @DateTime.Parse(Model.list[0].dt_txt).TimeOfDay
+        </h6>
+        <div class="weatherIcon"><img src="@("/wsymbol/" +Model.list[0].weather[0].icon+".png")" /></div>
+        <p>@Model.list[0].weather[0].description.ToUpper()</p>
+    </div>
+
+    <div>
+        <p><span class="text-info">Temp :</span> @Math.Round(Model.list[0].main.temp)&#176;C</p>
+        <p><span class="text-info">Cloud Cover :</span> @Model.list[0].clouds.all %</p>
+    </div>
+
+    <div>
+        <p><span class="text-info">Wind Speed :</span> @Math.Round((Model.list[0].wind.speed) * 3.6)km/h</p>
+        <p><span class="text-info">Wind Direction :</span> @Constants.DegreesToCardinalDetailed(Model.list[0].wind.deg)</p>
+    </div>
+
+</div>
