@@ -1,0 +1,68 @@
+@model YourSolutionName.Models.OpenWeatherMap
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="plain-section service">
+
+    <div class="container">
+        <h1 class="text-warning text-center">
+            <small>
+                Weather at our Holiday Villas
+                <a class="nav-link" asp-area="" asp-controller="OpenWeather" asp-action="Graphs">Back to Graphs</a>
+            </small>
+        </h1>
+        <div class="row service-row" style="margin-bottom:20px;">
+            <div>
+                @await Html.PartialAsync("_TodaysWeatherPartial")
+            </div>
+
+        </div>
+
+        
+        
+
+        <h4 class="text-warning text-center" style="margin-bottom:40px;">Details for next 5 days</h4>
+
+        <div class="row service-row" style="margin-top:40px;">
+
+            @foreach (var item in Model.list)
+            {
+
+                <div style="margin:0 auto 25px auto; min-height: 180px;">
+                    <div>
+                        <p class="text-warning">
+                            @DateTime.Parse(item.dt_txt).DayOfWeek
+                            @DateTime.Parse(item.dt_txt).TimeOfDay
+                        </p>
+                        <div class="weatherIcon"><img src="@("/wsymbol/"+item.weather[0].icon+".png")" /></div>
+                        <p>@item.weather[0].description.ToUpper()</p>
+                    </div>
+
+                    <div>
+                        <p><span class="text-info">Max Temp :</span> @Math.Round(item.main.temp_max)</p>
+                        <p><span class="text-info">Min Temp :</span> @Math.Round(item.main.temp_min)</p>
+
+                    </div>
+
+                    <div>
+                        <p><span class="text-info">Wind Speed :</span> @Math.Round((item.wind.speed) * 3.6) kph</p>
+                        <p><span class="text-info">Wind Direction :</span> @Constants.DegreesToCardinalDetailed(item.wind.deg)</p>
+
+                    </div>
+
+                    <div>
+                        <p><span class="text-info">% Cloudcover :</span> @item.clouds.all %</p>
+                        <p><span class="text-info">Humidity :</span> @item.main.humidity %</p>
+
+                    </div>
+                </div>
+
+            }
+
+            <p>Weather data provided by <a href="https://openweathermap.org/">OpenWeatherMap</a></p>
+
+
+        </div>
+    </div>
+</section>
