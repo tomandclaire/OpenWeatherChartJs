@@ -1,0 +1,50 @@
+@model YourSolutionName.Models.OpenWeatherMap
+
+@{
+    ViewData["Title"] = "Weather at your city";
+}
+
+
+<link rel="stylesheet" href="~/css/Chart.min.css" />
+
+
+
+<h4>
+    Chania Weather for the next 5 days
+    <a class="nav-link" asp-area="" asp-controller="OpenWeather" asp-action="Index">Click for Weather Details</a>
+</h4>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class=" col-sm">
+        <canvas id="tempChart"></canvas>
+    </div>
+    <div class=" col-sm">
+        <canvas id="humidityChart"></canvas>
+    </div>
+  </div>
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class=" col-sm">
+            <canvas id="windChart"></canvas>
+        </div>
+        <div class=" col-sm">
+            <canvas id="cloudChart"></canvas>
+        </div>
+    </div>
+</div>
+</div>
+
+@{ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart)ViewData["TemperatureChart"]; }
+@{ChartJSCore.Models.Chart chart2 = (ChartJSCore.Models.Chart)ViewData["HumidityChart"]; }
+@{ChartJSCore.Models.Chart chart3 = (ChartJSCore.Models.Chart)ViewData["WindChart"]; }
+@{ ChartJSCore.Models.Chart chart4 = (ChartJSCore.Models.Chart)ViewData["CloudChart"];}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script>@Html.Raw(chart.CreateChartCode("tempChart"))</script>
+    <script>@Html.Raw(chart2.CreateChartCode("humidityChart"))</script>
+    <script>@Html.Raw(chart3.CreateChartCode("windChart"))</script>
+    <script>@Html.Raw(chart4.CreateChartCode("cloudChart"))</script>
+}
